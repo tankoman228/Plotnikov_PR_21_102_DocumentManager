@@ -24,7 +24,21 @@ namespace Plotnikov_PR_21_102_DocumentManager
         {
             InitializeComponent();
 
-            new TextResizer(this, 4);
+            new SpecialModules.TextResizer(this, 4);
+
+            btnLogin.Click += BtnLogin_Click;
+        }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbUsername.Text.Length == 0) {
+                SpecialModules.Alert.Error("Введите имя пользователя!", MessageBoxImage.Exclamation); return;
+            }
+            if (tbPassword.Password.Length == 0)
+            {
+                SpecialModules.Alert.Error("Введите пароль!", MessageBoxImage.Exclamation); return;
+            }
+            MessageBox.Show("hehe");
         }
     }
 }

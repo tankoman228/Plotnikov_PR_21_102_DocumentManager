@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.SpecialModules
 {
     /// <summary>
     /// Умное масштабирование текста, учитывает изначальные размеры и делает это максимально правильно и грамотно

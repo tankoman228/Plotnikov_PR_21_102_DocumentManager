@@ -91,13 +91,14 @@
     <Compile Include="roles.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SpecialModules\Alert.cs" />
     <Compile Include="test_cases.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="test_case_results.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="TextResizer.cs" />
+    <Compile Include="SpecialModules\TextResizer.cs" />
     <Compile Include="workers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
