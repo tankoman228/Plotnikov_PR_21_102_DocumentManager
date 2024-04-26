@@ -24,13 +24,7 @@ namespace Plotnikov_PR_21_102_DocumentManager
         {
             InitializeComponent();
 
-            using (var db = new Entities())
-            {
-                foreach (var x in db.customers)
-                {
-                    MessageBox.Show(x.comment_from_manager);
-                }
-            }
+            new TextResizer(this, 4);
         }
     }
 }

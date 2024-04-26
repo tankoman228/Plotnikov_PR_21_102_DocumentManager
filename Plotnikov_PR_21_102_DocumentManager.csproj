@@ -97,6 +97,7 @@
     <Compile Include="test_case_results.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="TextResizer.cs" />
     <Compile Include="workers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
