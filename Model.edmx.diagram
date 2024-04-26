@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1cde2a1ec4d49688c724916d72be0c3" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.customers" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.document_types" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.documents" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.files" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.posts" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.project_workers" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.projects" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.roles" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.test_case_results" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.test_cases" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.workers" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.public_fkpc" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkdt" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkdp" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkfd" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkfw" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkwp" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkpwp" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkpww" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fktsp" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fkwr" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fktcrtc" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.public_fktcrw" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="Devart.Data.PostgreSql" ProviderManifestToken="PostgreSQL, 16.1.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "ARRAY" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "contacts" в таблице "21.102-PS-15-DocumentManager.public.customers" был исключен.-->
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="customer_sirname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="customer_lastname" Type="varchar" MaxLength="64" />
+          <Property Name="company_name" Type="varchar" MaxLength="64" />
+          <Property Name="comment_from_manager" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="document_types">
+          <Key>
+            <PropertyRef Name="id_document_type" />
+          </Key>
+          <Property Name="id_document_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctype_name" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="documents">
+          <Key>
+            <PropertyRef Name="id_document" />
+          </Key>
+          <Property Name="id_document" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_project" Type="int" Nullable="false" />
+          <Property Name="id_document_type" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="65535" />
+        </EntityType>
+        <EntityType Name="files">
+          <Key>
+            <PropertyRef Name="id_files" />
+          </Key>
+          <Property Name="id_files" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_document" Type="int" Nullable="false" />
+          <Property Name="id_worker" Type="int" Nullable="false" />
+          <Property Name="contents" Type="json" Nullable="false" />
+          <Property Name="when_uploaded" Type="timestamp" Precision="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postname" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="project_workers">
+          <Key>
+            <PropertyRef Name="id_project_worker" />
+          </Key>
+          <Property Name="id_project_worker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_project" Type="int" Nullable="false" />
+          <Property Name="id_worker" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "ARRAY" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "requirements" в таблице "21.102-PS-15-DocumentManager.public.projects" был исключен.-->
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_customer" Type="int" Nullable="false" />
+          <Property Name="project_name" Type="varchar" MaxLength="65535" Nullable="false" />
+          <Property Name="technical_task" Type="text" />
+          <Property Name="comment" Type="varchar" MaxLength="256" />
+          <Property Name="cost" Type="money" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolename" Type="varchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="test_case_results">
+          <Key>
+            <PropertyRef Name="id_test_case_result" />
+          </Key>
+          <Property Name="id_test_case_result" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tester" Type="int" Nullable="false" />
+          <Property Name="id_test_case" Type="int" Nullable="false" />
+          <Property Name="when_datetime" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="real_result" Type="text" Nullable="false" />
+          <Property Name="contains_bug_report" Type="boolean" Nullable="false" />
+          <Property Name="bug_report_description" Type="text" />
+          <Property Name="bug_report_reproducibility" Type="varchar" MaxLength="64" />
+          <Property Name="bug_report_attachments" Type="json" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6005: Тип данных "ARRAY" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "steps" в таблице "21.102-PS-15-DocumentManager.public.test_cases" был исключен.-->
+        <EntityType Name="test_cases">
+          <Key>
+            <PropertyRef Name="id_test_case" />
+          </Key>
+          <Property Name="id_test_case" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_project" Type="int" Nullable="false" />
+          <Property Name="priority" Type="smallint" Nullable="false" />
+          <Property Name="linked_requirement" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="preconditions" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="estimated_result" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="postcondition" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="id_in_project" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="workers">
+          <Key>
+            <PropertyRef Name="id_worker" />
+          </Key>
+          <Property Name="id_worker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_post" Type="int" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="sirname" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="64" />
+          <Property Name="phone" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="contract" Type="varchar" MaxLength="65535" />
+          <Property Name="approximate_salary" Type="money" />
+        </EntityType>
+        <Association Name="public_fkdp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="documents" Type="Self.documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="documents">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkdt">
+          <End Role="document_types" Type="Self.document_types" Multiplicity="1" />
+          <End Role="documents" Type="Self.documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document_types">
+              <PropertyRef Name="id_document_type" />
+            </Principal>
+            <Dependent Role="documents">
+              <PropertyRef Name="id_document_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkfd">
+          <End Role="documents" Type="Self.documents" Multiplicity="1" />
+          <End Role="files" Type="Self.files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documents">
+              <PropertyRef Name="id_document" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="id_document" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkfw">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="files" Type="Self.files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="id_worker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkpc">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="projects" Type="Self.projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkpwp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="project_workers" Type="Self.project_workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="project_workers">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkpww">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="project_workers" Type="Self.project_workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="project_workers">
+              <PropertyRef Name="id_worker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktcrtc">
+          <End Role="test_cases" Type="Self.test_cases" Multiplicity="1" />
+          <End Role="test_case_results" Type="Self.test_case_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_cases">
+              <PropertyRef Name="id_test_case" />
+            </Principal>
+            <Dependent Role="test_case_results">
+              <PropertyRef Name="id_test_case" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktcrw">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="test_case_results" Type="Self.test_case_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="test_case_results">
+              <PropertyRef Name="id_tester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktsp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="test_cases" Type="Self.test_cases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="test_cases">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkwp">
+          <End Role="posts" Type="Self.posts" Multiplicity="1" />
+          <End Role="workers" Type="Self.workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="workers">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkwr">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="workers" Type="Self.workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="workers">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="customers" EntityType="Self.customers" Schema="public" store:Type="Tables" />
+          <EntitySet Name="document_types" EntityType="Self.document_types" Schema="public" store:Type="Tables" />
+          <EntitySet Name="documents" EntityType="Self.documents" Schema="public" store:Type="Tables" />
+          <EntitySet Name="files" EntityType="Self.files" Schema="public" store:Type="Tables" />
+          <EntitySet Name="posts" EntityType="Self.posts" Schema="public" store:Type="Tables" />
+          <EntitySet Name="project_workers" EntityType="Self.project_workers" Schema="public" store:Type="Tables" />
+          <EntitySet Name="projects" EntityType="Self.projects" Schema="public" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="public" store:Type="Tables" />
+          <EntitySet Name="test_case_results" EntityType="Self.test_case_results" Schema="public" store:Type="Tables" />
+          <EntitySet Name="test_cases" EntityType="Self.test_cases" Schema="public" store:Type="Tables" />
+          <EntitySet Name="workers" EntityType="Self.workers" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="public_fkdp" Association="Self.public_fkdp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="documents" EntitySet="documents" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkdt" Association="Self.public_fkdt">
+            <End Role="document_types" EntitySet="document_types" />
+            <End Role="documents" EntitySet="documents" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkfd" Association="Self.public_fkfd">
+            <End Role="documents" EntitySet="documents" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkfw" Association="Self.public_fkfw">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkpc" Association="Self.public_fkpc">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkpwp" Association="Self.public_fkpwp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="project_workers" EntitySet="project_workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkpww" Association="Self.public_fkpww">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="project_workers" EntitySet="project_workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktcrtc" Association="Self.public_fktcrtc">
+            <End Role="test_cases" EntitySet="test_cases" />
+            <End Role="test_case_results" EntitySet="test_case_results" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktcrw" Association="Self.public_fktcrw">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="test_case_results" EntitySet="test_case_results" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktsp" Association="Self.public_fktsp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="test_cases" EntitySet="test_cases" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkwp" Association="Self.public_fkwp">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="workers" EntitySet="workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkwr" Association="Self.public_fkwr">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="workers" EntitySet="workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="id_customer" />
+          </Key>
+          <Property Name="id_customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customer_sirname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customer_lastname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="company_name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="comment_from_manager" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="projects" Relationship="Self.public_fkpc" FromRole="customers" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="document_types">
+          <Key>
+            <PropertyRef Name="id_document_type" />
+          </Key>
+          <Property Name="id_document_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctype_name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="documents" Relationship="Self.public_fkdt" FromRole="document_types" ToRole="documents" />
+        </EntityType>
+        <EntityType Name="documents">
+          <Key>
+            <PropertyRef Name="id_document" />
+          </Key>
+          <Property Name="id_document" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_project" Type="Int32" Nullable="false" />
+          <Property Name="id_document_type" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="document_types" Relationship="Self.public_fkdt" FromRole="documents" ToRole="document_types" />
+          <NavigationProperty Name="projects" Relationship="Self.public_fkdp" FromRole="documents" ToRole="projects" />
+          <NavigationProperty Name="files" Relationship="Self.public_fkfd" FromRole="documents" ToRole="files" />
+        </EntityType>
+        <EntityType Name="files">
+          <Key>
+            <PropertyRef Name="id_files" />
+          </Key>
+          <Property Name="id_files" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_document" Type="Int32" Nullable="false" />
+          <Property Name="id_worker" Type="Int32" Nullable="false" />
+          <Property Name="contents" Type="String" MaxLength="2147483640" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="when_uploaded" Type="DateTime" Precision="6" Nullable="false" />
+          <NavigationProperty Name="documents" Relationship="Self.public_fkfd" FromRole="files" ToRole="documents" />
+          <NavigationProperty Name="workers" Relationship="Self.public_fkfw" FromRole="files" ToRole="workers" />
+        </EntityType>
+        <EntityType Name="posts">
+          <Key>
+            <PropertyRef Name="id_post" />
+          </Key>
+          <Property Name="id_post" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="workers" Relationship="Self.public_fkwp" FromRole="posts" ToRole="workers" />
+        </EntityType>
+        <EntityType Name="project_workers">
+          <Key>
+            <PropertyRef Name="id_project_worker" />
+          </Key>
+          <Property Name="id_project_worker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_project" Type="Int32" Nullable="false" />
+          <Property Name="id_worker" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="projects" Relationship="Self.public_fkpwp" FromRole="project_workers" ToRole="projects" />
+          <NavigationProperty Name="workers" Relationship="Self.public_fkpww" FromRole="project_workers" ToRole="workers" />
+        </EntityType>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="id_project" />
+          </Key>
+          <Property Name="id_project" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_customer" Type="Int32" Nullable="false" />
+          <Property Name="project_name" Type="String" MaxLength="65535" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="technical_task" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="2" />
+          <NavigationProperty Name="customers" Relationship="Self.public_fkpc" FromRole="projects" ToRole="customers" />
+          <NavigationProperty Name="documents" Relationship="Self.public_fkdp" FromRole="projects" ToRole="documents" />
+          <NavigationProperty Name="project_workers" Relationship="Self.public_fkpwp" FromRole="projects" ToRole="project_workers" />
+          <NavigationProperty Name="test_cases" Relationship="Self.public_fktsp" FromRole="projects" ToRole="test_cases" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="workers" Relationship="Self.public_fkwr" FromRole="roles" ToRole="workers" />
+        </EntityType>
+        <EntityType Name="test_case_results">
+          <Key>
+            <PropertyRef Name="id_test_case_result" />
+          </Key>
+          <Property Name="id_test_case_result" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tester" Type="Int32" Nullable="false" />
+          <Property Name="id_test_case" Type="Int32" Nullable="false" />
+          <Property Name="when_datetime" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="real_result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contains_bug_report" Type="Boolean" Nullable="false" />
+          <Property Name="bug_report_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bug_report_reproducibility" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="bug_report_attachments" Type="String" MaxLength="2147483640" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="test_cases" Relationship="Self.public_fktcrtc" FromRole="test_case_results" ToRole="test_cases" />
+          <NavigationProperty Name="workers" Relationship="Self.public_fktcrw" FromRole="test_case_results" ToRole="workers" />
+        </EntityType>
+        <EntityType Name="test_cases">
+          <Key>
+            <PropertyRef Name="id_test_case" />
+          </Key>
+          <Property Name="id_test_case" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_project" Type="Int32" Nullable="false" />
+          <Property Name="priority" Type="Int16" Nullable="false" />
+          <Property Name="linked_requirement" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="preconditions" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estimated_result" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="postcondition" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_in_project" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="projects" Relationship="Self.public_fktsp" FromRole="test_cases" ToRole="projects" />
+          <NavigationProperty Name="test_case_results" Relationship="Self.public_fktcrtc" FromRole="test_cases" ToRole="test_case_results" />
+        </EntityType>
+        <EntityType Name="workers">
+          <Key>
+            <PropertyRef Name="id_worker" />
+          </Key>
+          <Property Name="id_worker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_post" Type="Int32" Nullable="false" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sirname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contract" Type="String" MaxLength="65535" FixedLength="false" Unicode="true" />
+          <Property Name="approximate_salary" Type="Decimal" Precision="19" Scale="2" />
+          <NavigationProperty Name="files" Relationship="Self.public_fkfw" FromRole="workers" ToRole="files" />
+          <NavigationProperty Name="posts" Relationship="Self.public_fkwp" FromRole="workers" ToRole="posts" />
+          <NavigationProperty Name="project_workers" Relationship="Self.public_fkpww" FromRole="workers" ToRole="project_workers" />
+          <NavigationProperty Name="roles" Relationship="Self.public_fkwr" FromRole="workers" ToRole="roles" />
+          <NavigationProperty Name="test_case_results" Relationship="Self.public_fktcrw" FromRole="workers" ToRole="test_case_results" />
+        </EntityType>
+        <Association Name="public_fkpc">
+          <End Role="customers" Type="Self.customers" Multiplicity="1" />
+          <End Role="projects" Type="Self.projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="id_customer" />
+            </Principal>
+            <Dependent Role="projects">
+              <PropertyRef Name="id_customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkdt">
+          <End Role="document_types" Type="Self.document_types" Multiplicity="1" />
+          <End Role="documents" Type="Self.documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document_types">
+              <PropertyRef Name="id_document_type" />
+            </Principal>
+            <Dependent Role="documents">
+              <PropertyRef Name="id_document_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkdp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="documents" Type="Self.documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="documents">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkfd">
+          <End Role="documents" Type="Self.documents" Multiplicity="1" />
+          <End Role="files" Type="Self.files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="documents">
+              <PropertyRef Name="id_document" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="id_document" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkfw">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="files" Type="Self.files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="files">
+              <PropertyRef Name="id_worker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkwp">
+          <End Role="posts" Type="Self.posts" Multiplicity="1" />
+          <End Role="workers" Type="Self.workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="posts">
+              <PropertyRef Name="id_post" />
+            </Principal>
+            <Dependent Role="workers">
+              <PropertyRef Name="id_post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkpwp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="project_workers" Type="Self.project_workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="project_workers">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkpww">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="project_workers" Type="Self.project_workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="project_workers">
+              <PropertyRef Name="id_worker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktsp">
+          <End Role="projects" Type="Self.projects" Multiplicity="1" />
+          <End Role="test_cases" Type="Self.test_cases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="projects">
+              <PropertyRef Name="id_project" />
+            </Principal>
+            <Dependent Role="test_cases">
+              <PropertyRef Name="id_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fkwr">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="workers" Type="Self.workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="workers">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktcrtc">
+          <End Role="test_cases" Type="Self.test_cases" Multiplicity="1" />
+          <End Role="test_case_results" Type="Self.test_case_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_cases">
+              <PropertyRef Name="id_test_case" />
+            </Principal>
+            <Dependent Role="test_case_results">
+              <PropertyRef Name="id_test_case" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="public_fktcrw">
+          <End Role="workers" Type="Self.workers" Multiplicity="1" />
+          <End Role="test_case_results" Type="Self.test_case_results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="workers">
+              <PropertyRef Name="id_worker" />
+            </Principal>
+            <Dependent Role="test_case_results">
+              <PropertyRef Name="id_tester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customers" EntityType="Self.customers" />
+          <EntitySet Name="document_types" EntityType="Self.document_types" />
+          <EntitySet Name="documents" EntityType="Self.documents" />
+          <EntitySet Name="files" EntityType="Self.files" />
+          <EntitySet Name="posts" EntityType="Self.posts" />
+          <EntitySet Name="project_workers" EntityType="Self.project_workers" />
+          <EntitySet Name="projects" EntityType="Self.projects" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="test_case_results" EntityType="Self.test_case_results" />
+          <EntitySet Name="test_cases" EntityType="Self.test_cases" />
+          <EntitySet Name="workers" EntityType="Self.workers" />
+          <AssociationSet Name="public_fkpc" Association="Self.public_fkpc">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkdt" Association="Self.public_fkdt">
+            <End Role="document_types" EntitySet="document_types" />
+            <End Role="documents" EntitySet="documents" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkdp" Association="Self.public_fkdp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="documents" EntitySet="documents" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkfd" Association="Self.public_fkfd">
+            <End Role="documents" EntitySet="documents" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkfw" Association="Self.public_fkfw">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="files" EntitySet="files" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkwp" Association="Self.public_fkwp">
+            <End Role="posts" EntitySet="posts" />
+            <End Role="workers" EntitySet="workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkpwp" Association="Self.public_fkpwp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="project_workers" EntitySet="project_workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkpww" Association="Self.public_fkpww">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="project_workers" EntitySet="project_workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktsp" Association="Self.public_fktsp">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="test_cases" EntitySet="test_cases" />
+          </AssociationSet>
+          <AssociationSet Name="public_fkwr" Association="Self.public_fkwr">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="workers" EntitySet="workers" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktcrtc" Association="Self.public_fktcrtc">
+            <End Role="test_cases" EntitySet="test_cases" />
+            <End Role="test_case_results" EntitySet="test_case_results" />
+          </AssociationSet>
+          <AssociationSet Name="public_fktcrw" Association="Self.public_fktcrw">
+            <End Role="workers" EntitySet="workers" />
+            <End Role="test_case_results" EntitySet="test_case_results" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="Model.customers">
+              <MappingFragment StoreEntitySet="customers">
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="customer_sirname" ColumnName="customer_sirname" />
+                <ScalarProperty Name="customer_lastname" ColumnName="customer_lastname" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="comment_from_manager" ColumnName="comment_from_manager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="document_types">
+            <EntityTypeMapping TypeName="Model.document_types">
+              <MappingFragment StoreEntitySet="document_types">
+                <ScalarProperty Name="id_document_type" ColumnName="id_document_type" />
+                <ScalarProperty Name="doctype_name" ColumnName="doctype_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documents">
+            <EntityTypeMapping TypeName="Model.documents">
+              <MappingFragment StoreEntitySet="documents">
+                <ScalarProperty Name="id_document" ColumnName="id_document" />
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="id_document_type" ColumnName="id_document_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="files">
+            <EntityTypeMapping TypeName="Model.files">
+              <MappingFragment StoreEntitySet="files">
+                <ScalarProperty Name="id_files" ColumnName="id_files" />
+                <ScalarProperty Name="id_document" ColumnName="id_document" />
+                <ScalarProperty Name="id_worker" ColumnName="id_worker" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="when_uploaded" ColumnName="when_uploaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="posts">
+            <EntityTypeMapping TypeName="Model.posts">
+              <MappingFragment StoreEntitySet="posts">
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="postname" ColumnName="postname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="project_workers">
+            <EntityTypeMapping TypeName="Model.project_workers">
+              <MappingFragment StoreEntitySet="project_workers">
+                <ScalarProperty Name="id_project_worker" ColumnName="id_project_worker" />
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="id_worker" ColumnName="id_worker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projects">
+            <EntityTypeMapping TypeName="Model.projects">
+              <MappingFragment StoreEntitySet="projects">
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="id_customer" ColumnName="id_customer" />
+                <ScalarProperty Name="project_name" ColumnName="project_name" />
+                <ScalarProperty Name="technical_task" ColumnName="technical_task" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="Model.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_case_results">
+            <EntityTypeMapping TypeName="Model.test_case_results">
+              <MappingFragment StoreEntitySet="test_case_results">
+                <ScalarProperty Name="id_test_case_result" ColumnName="id_test_case_result" />
+                <ScalarProperty Name="id_tester" ColumnName="id_tester" />
+                <ScalarProperty Name="id_test_case" ColumnName="id_test_case" />
+                <ScalarProperty Name="when_datetime" ColumnName="when_datetime" />
+                <ScalarProperty Name="real_result" ColumnName="real_result" />
+                <ScalarProperty Name="contains_bug_report" ColumnName="contains_bug_report" />
+                <ScalarProperty Name="bug_report_description" ColumnName="bug_report_description" />
+                <ScalarProperty Name="bug_report_reproducibility" ColumnName="bug_report_reproducibility" />
+                <ScalarProperty Name="bug_report_attachments" ColumnName="bug_report_attachments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_cases">
+            <EntityTypeMapping TypeName="Model.test_cases">
+              <MappingFragment StoreEntitySet="test_cases">
+                <ScalarProperty Name="id_test_case" ColumnName="id_test_case" />
+                <ScalarProperty Name="id_project" ColumnName="id_project" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="linked_requirement" ColumnName="linked_requirement" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="preconditions" ColumnName="preconditions" />
+                <ScalarProperty Name="estimated_result" ColumnName="estimated_result" />
+                <ScalarProperty Name="postcondition" ColumnName="postcondition" />
+                <ScalarProperty Name="id_in_project" ColumnName="id_in_project" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workers">
+            <EntityTypeMapping TypeName="Model.workers">
+              <MappingFragment StoreEntitySet="workers">
+                <ScalarProperty Name="id_worker" ColumnName="id_worker" />
+                <ScalarProperty Name="id_post" ColumnName="id_post" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sirname" ColumnName="sirname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+                <ScalarProperty Name="approximate_salary" ColumnName="approximate_salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
