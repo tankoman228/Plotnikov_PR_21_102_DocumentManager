@@ -1,4 +1,5 @@
 ﻿using Plotnikov_PR_21_102_DocumentManager.SpecialModules;
+using Plotnikov_PR_21_102_DocumentManager.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,19 @@ namespace Plotnikov_PR_21_102_DocumentManager
 
                 UserSession.worker = acc;
 
+                switch (acc.roles.id_role)
+                {
+                    case 1: new Documents(true).Show(); break;
+                    case 2: new Documents(false).Show(); break;
+                    case 3: new ComingSoon().Show(); break;
+                    case 4: new Workers().Show(); break;
+                    case 5: new TestCasesForTesters().Show(); break;
+
+                    default:
+                        Alert.Error("Unknown role");
+                        return;
+                }
+                Close();
             }
         }
     }
