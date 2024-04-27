@@ -7,6 +7,38 @@
         mc:Ignorable="d"
         Title="Workers" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Margin="10">Список работников:</Label>
+        <ListBox x:Name="lbDocuments" Margin="40" />
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="3">
+            <Label>ФИО</Label>
+            <TextBox x:Name="tbName"></TextBox>
+            <Label>Должность</Label>
+            <ComboBox></ComboBox>
+            <Label>Роль в системе</Label>
+            <ComboBox></ComboBox>
+            <Label>Номер телефона</Label>
+            <TextBox></TextBox>
+            <Label>Электронная почта</Label>
+            <TextBox></TextBox>
+            <Label>Пароль</Label>
+            <PasswordBox></PasswordBox>
+            <Label>Ссылка на контракт</Label>
+            <TextBox></TextBox>
+            <Label>Приблизительный размер зарплаты</Label>
+            <TextBox></TextBox>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnInsert" Padding="10" Margin="10">Сохранить как новый</Button>
+                <Button x:Name="btnUpdate" Padding="10" Margin="10">Обновить</Button>
+                <Button x:Name="btnDelete" Padding="10" Margin="10">Удалить</Button>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>

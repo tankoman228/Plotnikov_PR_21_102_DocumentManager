@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plotnikov_PR_21_102_DocumentManager.Windows"
         mc:Ignorable="d"
-        Title="Documents" Height="450" Width="800">
+        Title="Documents" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Margin="10">Список документов для проекта:</Label>
+        <ComboBox x:Name="cbProject"
+            Margin="10,10,30,10" VerticalAlignment="Top" HorizontalAlignment="Right"></ComboBox>
+        <ListBox x:Name="lbDocuments" Margin="40" />
+
+        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20">
+            <Label>Наименование</Label>
+            <TextBox x:Name="tbName"></TextBox>
+            <Label>Описание</Label>
+            <RichTextBox x:Name="rtbDescr" Height="200"></RichTextBox>
+            <Label>Тип документа</Label>
+            <ComboBox x:Name="cbType"></ComboBox>
+            <TextBox></TextBox>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnInsert" Padding="10" Margin="10">Сохранить как новый</Button>
+                <Button x:Name="btnUpdate" Padding="10" Margin="10">Обновить</Button>
+                <Button x:Name="btnDelete" Padding="10" Margin="10">Удалить</Button>
+            </StackPanel>
+        </StackPanel>
         
     </Grid>
 </Window>
