@@ -92,6 +92,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SpecialModules\Alert.cs" />
+    <Compile Include="SpecialModules\PasswordHash__PLUG.cs" />
     <Compile Include="test_cases.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -99,6 +100,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SpecialModules\TextResizer.cs" />
+    <Compile Include="UserSession.cs" />
     <Compile Include="workers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
