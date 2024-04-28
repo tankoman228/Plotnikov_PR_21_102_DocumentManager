@@ -16,7 +16,7 @@
         <ListBox x:Name="lbDocuments" Margin="40,52,40,40" />
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="3">
-            <Label>ФИО</Label>
+            <Label>Имя Фамилия Отчество</Label>
             <TextBox x:Name="tbName"></TextBox>
             <Label>Должность</Label>
             <ComboBox x:Name="cbPost"></ComboBox>
