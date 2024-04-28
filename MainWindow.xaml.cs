@@ -1,4 +1,5 @@
-﻿using Plotnikov_PR_21_102_DocumentManager.SpecialModules;
+﻿using Plotnikov_PR_21_102_DocumentManager.Entity;
+using Plotnikov_PR_21_102_DocumentManager.SpecialModules;
 using Plotnikov_PR_21_102_DocumentManager.Windows;
 using System;
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace Plotnikov_PR_21_102_DocumentManager
             }
             
             //Проверка, верны ли данные
-            using (var db = new Entities())
+            using (var db = new Entities1())
             {
                 var acc = db.workers.Where(x => x.email.Equals(tbUsername.Text)).FirstOrDefault();
 

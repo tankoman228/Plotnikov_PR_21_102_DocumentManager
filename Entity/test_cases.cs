@@ -7,36 +7,37 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class workers
+    public partial class test_cases
     {
-        public workers()
+        public test_cases()
         {
-            this.files = new HashSet<files>();
-            this.project_workers = new HashSet<project_workers>();
             this.test_case_results = new HashSet<test_case_results>();
         }
     
-        public int id_worker { get; set; }
-        public int id_post { get; set; }
-        public int id_role { get; set; }
+        public int id_test_case { get; set; }
+        public int id_project { get; set; }
+        public short priority { get; set; }
+        public string linked_requirement { get; set; }
         public string name { get; set; }
-        public string sirname { get; set; }
-        public string lastname { get; set; }
-        public string phone { get; set; }
-        public string email { get; set; }
-        public string password { get; set; }
-        public string contract { get; set; }
-        public Nullable<decimal> approximate_salary { get; set; }
+        public string preconditions { get; set; }
+        public string estimated_result { get; set; }
+        public string postcondition { get; set; }
+        public string id_in_project { get; set; }
+        public string steps { get; set; }
     
-        public virtual ICollection<files> files { get; set; }
-        public virtual posts posts { get; set; }
-        public virtual ICollection<project_workers> project_workers { get; set; }
-        public virtual roles roles { get; set; }
+        public virtual projects projects { get; set; }
         public virtual ICollection<test_case_results> test_case_results { get; set; }
+
+
+        public override string ToString()
+        {
+            return id_in_project + " <--> " + projects.project_name;
+        }
+
     }
 }

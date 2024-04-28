@@ -94,8 +94,6 @@
           <Property Name="bug_report_reproducibility" Type="varchar" MaxLength="64" />
           <Property Name="bug_report_attachments" Type="json" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6005: Тип данных "ARRAY" в настоящее время не поддерживается для целевой версии платформы Entity Framework; столбец "steps" в таблице "21.102-PS-15-DocumentManager.public.test_cases" был исключен.-->
         <EntityType Name="test_cases">
           <Key>
             <PropertyRef Name="id_test_case" />
@@ -109,6 +107,7 @@
           <Property Name="estimated_result" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="postcondition" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="id_in_project" Type="varchar" MaxLength="16" />
+          <Property Name="steps" Type="text" />
         </EntityType>
         <EntityType Name="workers">
           <Key>
@@ -451,6 +450,7 @@
           <Property Name="estimated_result" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="postcondition" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="id_in_project" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="steps" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="projects" Relationship="Self.public_fktsp" FromRole="test_cases" ToRole="projects" />
           <NavigationProperty Name="test_case_results" Relationship="Self.public_fktcrtc" FromRole="test_cases" ToRole="test_case_results" />
         </EntityType>
@@ -619,7 +619,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="customers" EntityType="Self.customers" />
           <EntitySet Name="document_types" EntityType="Self.document_types" />
           <EntitySet Name="documents" EntityType="Self.documents" />
@@ -685,7 +685,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities1">
           <EntitySetMapping Name="customers">
             <EntityTypeMapping TypeName="Model.customers">
               <MappingFragment StoreEntitySet="customers">
@@ -792,6 +792,7 @@
                 <ScalarProperty Name="estimated_result" ColumnName="estimated_result" />
                 <ScalarProperty Name="postcondition" ColumnName="postcondition" />
                 <ScalarProperty Name="id_in_project" ColumnName="id_in_project" />
+                <ScalarProperty Name="steps" ColumnName="steps" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

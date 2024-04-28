@@ -7,20 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class files
+    public partial class posts
     {
-        public int id_files { get; set; }
-        public int id_document { get; set; }
-        public int id_worker { get; set; }
-        public string contents { get; set; }
-        public System.DateTime when_uploaded { get; set; }
+        public posts()
+        {
+            this.workers = new HashSet<workers>();
+        }
     
-        public virtual documents documents { get; set; }
-        public virtual workers workers { get; set; }
+        public int id_post { get; set; }
+        public string postname { get; set; }
+    
+        public virtual ICollection<workers> workers { get; set; }
     }
 }

@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:Plotnikov_PR_21_102_DocumentManager"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="RichTextBox">
+            <Setter Property="Block.LineHeight" Value="1"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

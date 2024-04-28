@@ -7,29 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class test_cases
+    public partial class test_case_results
     {
-        public test_cases()
-        {
-            this.test_case_results = new HashSet<test_case_results>();
-        }
-    
+        public int id_test_case_result { get; set; }
+        public int id_tester { get; set; }
         public int id_test_case { get; set; }
-        public int id_project { get; set; }
-        public short priority { get; set; }
-        public string linked_requirement { get; set; }
-        public string name { get; set; }
-        public string preconditions { get; set; }
-        public string estimated_result { get; set; }
-        public string postcondition { get; set; }
-        public string id_in_project { get; set; }
+        public System.DateTime when_datetime { get; set; }
+        public string real_result { get; set; }
+        public bool contains_bug_report { get; set; }
+        public string bug_report_description { get; set; }
+        public string bug_report_reproducibility { get; set; }
+        public string bug_report_attachments { get; set; }
     
-        public virtual projects projects { get; set; }
-        public virtual ICollection<test_case_results> test_case_results { get; set; }
+        public virtual test_cases test_cases { get; set; }
+        public virtual workers workers { get; set; }
     }
 }

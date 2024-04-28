@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plotnikov_PR_21_102_DocumentManager.Windows"
         mc:Ignorable="d"
-        Title="Панель тестировщика" Height="450" Width="800">
+        Title="Панель тестировщика" Height="450" Width="800" MinHeight="450" MinWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Margin="10">Выберите тест-кейс</Label>
-        <ListBox x:Name="lbTestCases" Margin="40" />
+        <ListBox x:Name="lbTestCases" Margin="40, 50, 40, 40" />
 
         <ScrollViewer Grid.Column="1"  Margin="3" Background="AliceBlue">
             <StackPanel Orientation="Vertical">
@@ -21,6 +21,11 @@
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="btnPrevious" Padding="10" Margin="10">Предыдущий результат</Button>
                     <Button x:Name="btnNext" Padding="10" Margin="10">Следующий результат</Button>
+                    <Button x:Name="btnDelete" Padding="10" Margin="10">Удалить</Button>
+                    <Grid>
+                        <Label>Тест кейс от:</Label>
+                        <TextBox x:Name="lDate" VerticalAlignment="Bottom" IsReadOnly="True"></TextBox>
+                    </Grid>
                 </StackPanel>
                 <Button x:Name="btnNew" Padding="10" Margin="10">Оформить новый результат</Button>
 
@@ -67,7 +72,7 @@
 
                     <Label Grid.Row="4" FontSize="16" Margin="2">Шаги выполнения</Label>
                     <ListBox x:Name="lbSteps"
-                        Grid.Row="4" Grid.Column="1" Height="100" FontSize="16" Margin="2"></ListBox>
+                        Grid.Row="4" Grid.Column="1" Height="190" FontSize="16" Margin="2"></ListBox>
 
                     <Label Grid.Row="5" FontSize="16" Margin="2">Ожидаемый результат</Label>
                     <RichTextBox x:Name="rtbEstimated" Height="70" 
@@ -92,16 +97,6 @@
                     <Label Grid.Row="10" FontSize="16" Margin="2">Воспроизводимость</Label>
                     <RichTextBox x:Name="rtbReproduce"
                         Height="100" Grid.Row="10" Grid.Column="1" IsReadOnly="False" FontSize="16" Margin="2"></RichTextBox>
-
-                    <Label Grid.Row="11" FontSize="16" Margin="2">Вложение</Label>
-                    <RichTextBox x:Name="rtbAttachments"
-                        Height="100" Grid.Row="11" Grid.Column="1" IsReadOnly="True" FontSize="16" Margin="2"></RichTextBox>
-                    <Button x:Name="btnChooseLink" 
-                        Grid.Row="12" Grid.Column="1" FontSize="16" Margin="2">Выбрать ссылку из поля</Button>
-                    <TextBox x:Name="tbLink"
-                        Grid.Row="13" Grid.Column="1" FontSize="16" Margin="2"></TextBox>
-                    <Button x:Name="btnCleaarAttachment"
-                        Grid.Row="14" Grid.Column="1" FontSize="16" Margin="2">Очистить вложение</Button>
 
                     <Button x:Name="btnSave"
                         Grid.Row="15" Grid.ColumnSpan="2" Margin="5" FontSize="16">Оформить/Сохранить</Button>

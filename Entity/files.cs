@@ -7,24 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class test_case_results
+    public partial class files
     {
-        public int id_test_case_result { get; set; }
-        public int id_tester { get; set; }
-        public int id_test_case { get; set; }
-        public System.DateTime when_datetime { get; set; }
-        public string real_result { get; set; }
-        public bool contains_bug_report { get; set; }
-        public string bug_report_description { get; set; }
-        public string bug_report_reproducibility { get; set; }
-        public string bug_report_attachments { get; set; }
+        public int id_files { get; set; }
+        public int id_document { get; set; }
+        public int id_worker { get; set; }
+        public string contents { get; set; }
+        public System.DateTime when_uploaded { get; set; }
     
-        public virtual test_cases test_cases { get; set; }
+        public virtual documents documents { get; set; }
         public virtual workers workers { get; set; }
     }
 }

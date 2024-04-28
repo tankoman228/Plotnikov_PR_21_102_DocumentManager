@@ -62,43 +62,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="customers.cs">
+    <Compile Include="Entity\customers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="documents.cs">
+    <Compile Include="Entity\documents.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="document_types.cs">
+    <Compile Include="Entity\document_types.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="files.cs">
+    <Compile Include="Entity\files.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.cs">
+    <Compile Include="Entity\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Model.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="posts.cs">
+    <Compile Include="Entity\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\posts.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="projects.cs">
+    <Compile Include="Entity\projects.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="project_workers.cs">
+    <Compile Include="Entity\project_workers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="roles.cs">
+    <Compile Include="Entity\roles.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\test_cases.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\test_case_results.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\workers.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="SpecialModules\Alert.cs" />
     <Compile Include="SpecialModules\PasswordHash__PLUG.cs" />
-    <Compile Include="test_cases.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="test_case_results.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SpecialModules\RichTextBoxExtensions.cs" />
     <Compile Include="SpecialModules\TextResizer.cs" />
     <Compile Include="UserSession.cs" />
     <Compile Include="Windows\ComingSoon.xaml.cs">
@@ -112,9 +126,6 @@
     </Compile>
     <Compile Include="Windows\Workers.xaml.cs">
       <DependentUpon>Workers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="workers.cs">
-      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -146,16 +157,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -173,11 +174,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="Entity\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
+    <None Include="Entity\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -190,19 +191,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entity\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.tt">
+    <Content Include="Entity\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

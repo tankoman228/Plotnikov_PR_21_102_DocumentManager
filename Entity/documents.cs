@@ -7,18 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Plotnikov_PR_21_102_DocumentManager
+namespace Plotnikov_PR_21_102_DocumentManager.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class project_workers
+    public partial class documents
     {
-        public int id_project_worker { get; set; }
-        public int id_project { get; set; }
-        public int id_worker { get; set; }
+        public documents()
+        {
+            this.files = new HashSet<files>();
+        }
     
+        public int id_document { get; set; }
+        public int id_project { get; set; }
+        public int id_document_type { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+    
+        public virtual document_types document_types { get; set; }
         public virtual projects projects { get; set; }
-        public virtual workers workers { get; set; }
+        public virtual ICollection<files> files { get; set; }
     }
 }
