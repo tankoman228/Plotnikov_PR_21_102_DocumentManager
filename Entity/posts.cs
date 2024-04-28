@@ -23,5 +23,11 @@ namespace Plotnikov_PR_21_102_DocumentManager.Entity
         public string postname { get; set; }
     
         public virtual ICollection<workers> workers { get; set; }
+
+
+        public override string ToString()
+        {
+            return postname;
+        }
     }
 }

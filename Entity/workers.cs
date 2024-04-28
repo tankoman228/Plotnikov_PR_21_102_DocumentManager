@@ -38,5 +38,15 @@ namespace Plotnikov_PR_21_102_DocumentManager.Entity
         public virtual ICollection<project_workers> project_workers { get; set; }
         public virtual roles roles { get; set; }
         public virtual ICollection<test_case_results> test_case_results { get; set; }
+
+        public override string ToString()
+        {
+            string patr;
+            if (lastname != null)
+                patr = lastname;
+            else
+                patr = "";
+            return $"{posts.postname} | {name} {sirname} {patr} | {email}";
+        }
     }
 }
