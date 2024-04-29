@@ -88,7 +88,7 @@ namespace Plotnikov_PR_21_102_DocumentManager
                 }
 
                 UserSession.worker = acc;
-
+                // Переход куда нужно после окончания авторизации
                 switch (acc.roles.id_role)
                 {
                     case 1: new Documents(true).Show(); break;

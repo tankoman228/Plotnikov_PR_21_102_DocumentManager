@@ -110,58 +110,67 @@ namespace Plotnikov_PR_21_102_DocumentManager.Windows
             if (!Alert.ConfirmAction($"Вы уверены, что хотите изменить данные для {worker.name} {worker.email}?"))
                 return;
 
-            using (var db = new Entities1())
+            try
             {
-                var w = db.workers.Where(x => x.id_worker == worker.id_worker).First();
-                
-                var fname = tbName.Text.Split(' ');
-                if (fname.Length != 2 && fname.Length != 3) {
-                    Alert.Error("Неверно введённое ФИО"); return;
-                }
-
-                w.name = fname[0];
-                w.sirname = fname[1];
-                if (fname.Length == 3)
-                    w.lastname = fname[2];
-
-                // Проверка и сохранение почты
-                if (Regex.IsMatch(tbMail.Text, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
+                using (var db = new Entities1())
                 {
-                    w.email = tbMail.Text;
-                }
-                else
-                {
-                    Alert.Error("Неверный формат почты!");
-                    return;
-                }
+                    var w = db.workers.Where(x => x.id_worker == worker.id_worker).First();
 
-                // Сохранение номера телефона
-                if (!Regex.IsMatch(tbPhone.Text, @"\+\d\d\d\d\d\d\d\d\d\d\d\z"))
-                {
-                    Alert.Error("Неверный формат номера телефона!");
-                    return;
-                }
-                w.phone = tbPhone.Text;
+                    var fname = tbName.Text.Split(' ');
+                    if (fname.Length != 2 && fname.Length != 3)
+                    {
+                        Alert.Error("Неверно введённое ФИО"); return;
+                    }
 
-                try
-                {
-                    w.approximate_salary = decimal.Parse(tbSalary.Text);
-                }
-                catch { Alert.Error("Неверно введённые данные о зарплате! Введите целое или дробное число"); return; }
+                    w.name = fname[0];
+                    w.sirname = fname[1];
+                    if (fname.Length == 3)
+                        w.lastname = fname[2];
 
-                w.contract = tbContract.Text;
-                
-                if (pbPassword.Password.Length > 0 && 
-                    Alert.ConfirmAction("Вы действительно хотите сменить пароль пользователя?"))
-                {
-                    w.password = PasswordHash__PLUG.getHash(pbPassword.Password);
-                }
-                w.id_post = cbPost.SelectedIndex + 1;
-                w.id_role = cbRole.SelectedIndex + 1;
+                    // Проверка и сохранение почты
+                    if (Regex.IsMatch(tbMail.Text, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
+                    {
+                        w.email = tbMail.Text;
+                    }
+                    else
+                    {
+                        Alert.Error("Неверный формат почты!");
+                        return;
+                    }
 
-                db.SaveChanges();
-                LbDocuments_SelectionChanged(null, null);
-                Alert.Success("Работник обновлён");
+                    // Сохранение номера телефона
+                    if (!Regex.IsMatch(tbPhone.Text, @"\+\d\d\d\d\d\d\d\d\d\d\d\z"))
+                    {
+                        Alert.Error("Неверный формат номера телефона!");
+                        return;
+                    }
+                    w.phone = tbPhone.Text;
+
+                    try
+                    {
+                        w.approximate_salary = decimal.Parse(tbSalary.Text);
+                    }
+                    catch { Alert.Error("Неверно введённые данные о зарплате! Введите целое или дробное число"); return; }
+
+                    w.contract = tbContract.Text;
+
+                    if (pbPassword.Password.Length > 0 &&
+                        Alert.ConfirmAction("Вы действительно хотите сменить пароль пользователя?"))
+                    {
+                        w.password = PasswordHash__PLUG.getHash(pbPassword.Password);
+                    }
+                    w.id_post = cbPost.SelectedIndex + 1;
+                    w.id_role = cbRole.SelectedIndex + 1;
+
+                    db.SaveChanges();
+                    LbDocuments_SelectionChanged(null, null);
+                    Alert.Success("Работник обновлён");
+                }
+            }
+            catch (Exception ex)
+            {
+                Alert.Error($"Невозможно изменить пользователя {worker.email}, возможно, дублируется email" +
+                    $". \n\n {ex.Message}");
             }
         }
 
@@ -170,68 +179,77 @@ namespace Plotnikov_PR_21_102_DocumentManager.Windows
             if (!Alert.ConfirmAction($"Вы уверены, что хотите добавить нового пользователя?"))
                 return;
 
-            if (cbPost.SelectedItem == null || cbRole.SelectedItem == null) {
+            if (cbPost.SelectedItem == null || cbRole.SelectedItem == null)
+            {
                 Alert.Error("Не указана должность и/или роль"); return;
             }
 
-            using (var db = new Entities1())
+            try
             {
-                var w = new workers();
-
-                var fname = tbName.Text.Split(' ');
-                if (fname.Length != 2 && fname.Length != 3)
+                using (var db = new Entities1())
                 {
-                    Alert.Error("Неверно введённое ФИО"); return;
+                    var w = new workers();
+
+                    var fname = tbName.Text.Split(' ');
+                    if (fname.Length != 2 && fname.Length != 3)
+                    {
+                        Alert.Error("Неверно введённое ФИО"); return;
+                    }
+
+                    w.name = fname[0];
+                    w.sirname = fname[1];
+                    if (fname.Length == 3)
+                        w.lastname = fname[2];
+
+                    // Проверка и сохранение почты
+                    if (Regex.IsMatch(tbMail.Text, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
+                    {
+                        w.email = tbMail.Text;
+                    }
+                    else
+                    {
+                        Alert.Error("Неверный формат почты!");
+                        return;
+                    }
+
+                    // Сохранение номера телефона
+                    if (!Regex.IsMatch(tbPhone.Text, @"\+\d\d\d\d\d\d\d\d\d\d\d\z"))
+                    {
+                        Alert.Error("Неверный формат номера телефона!");
+                        return;
+                    }
+                    w.phone = tbPhone.Text;
+
+
+                    try
+                    {
+                        w.approximate_salary = decimal.Parse(tbSalary.Text);
+                    }
+                    catch { Alert.Error("Неверно введённые данные о зарплате! Введите целое или дробное число"); return; }
+
+                    w.contract = tbContract.Text;
+
+                    if (pbPassword.Password.Length == 0)
+                    {
+                        Alert.Error("Не указан пароль для пользователя"); return;
+                    }
+                    else
+                        w.password = PasswordHash__PLUG.getHash(pbPassword.Password);
+
+                    w.id_post = cbPost.SelectedIndex + 1;
+                    w.id_role = cbRole.SelectedIndex + 1;
+
+                    db.workers.Add(w);
+
+                    db.SaveChanges();
+                    LbDocuments_SelectionChanged(null, null);
+                    Alert.Success("Добавлен новый работник");
                 }
-
-                w.name = fname[0];
-                w.sirname = fname[1];
-                if (fname.Length == 3)
-                    w.lastname = fname[2];
-
-                // Проверка и сохранение почты
-                if (Regex.IsMatch(tbMail.Text, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
-                {
-                    w.email = tbMail.Text;
-                }
-                else
-                {
-                    Alert.Error("Неверный формат почты!");
-                    return;
-                }
-
-                // Сохранение номера телефона
-                if (!Regex.IsMatch(tbPhone.Text, @"\+\d\d\d\d\d\d\d\d\d\d\d\z"))
-                {
-                    Alert.Error("Неверный формат номера телефона!");
-                    return;
-                }
-                w.phone = tbPhone.Text;
-
-
-                try
-                {
-                    w.approximate_salary = decimal.Parse(tbSalary.Text);
-                }
-                catch { Alert.Error("Неверно введённые данные о зарплате! Введите целое или дробное число"); return; }
-
-                w.contract = tbContract.Text;
-
-                if (pbPassword.Password.Length == 0)
-                {
-                    Alert.Error("Не указан пароль для пользователя"); return;
-                }
-                else
-                    w.password = PasswordHash__PLUG.getHash(pbPassword.Password);
-
-                w.id_post = cbPost.SelectedIndex + 1;
-                w.id_role = cbRole.SelectedIndex + 1;
-
-                db.workers.Add(w);
-
-                db.SaveChanges();
-                LbDocuments_SelectionChanged(null, null);
-                Alert.Success("Добавлен новый работник");
+            }
+            catch (Exception ex)
+            {
+                Alert.Error($"Невозможно добавить пользователя {worker.email}, возможно, дублируется email" +
+                    $". \n\n {ex.Message}");
             }
         }
     }
