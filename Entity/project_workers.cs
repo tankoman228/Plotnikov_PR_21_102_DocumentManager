@@ -20,5 +20,10 @@ namespace Plotnikov_PR_21_102_DocumentManager.Entity
     
         public virtual projects projects { get; set; }
         public virtual workers workers { get; set; }
+
+        public override string ToString()
+        {
+            return projects.project_name;
+        }
     }
 }

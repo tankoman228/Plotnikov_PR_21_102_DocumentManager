@@ -12,10 +12,10 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Label Margin="10">Список документов для проекта:</Label>
+        <Label Margin="10">Документы проекта:</Label>
         <ComboBox x:Name="cbProject"
-            Margin="10,10,30,10" VerticalAlignment="Top" HorizontalAlignment="Right"></ComboBox>
-        <ListBox x:Name="lbDocuments" Margin="40" />
+            Margin="10,10,10,10" VerticalAlignment="Top" HorizontalAlignment="Right"></ComboBox>
+        <ListBox x:Name="lbDocuments" Margin="40,50,40,40" />
 
         <StackPanel Grid.Column="1" Orientation="Vertical" Margin="20">
             <Label>Наименование</Label>
@@ -24,7 +24,6 @@
             <RichTextBox x:Name="rtbDescr" Height="200"></RichTextBox>
             <Label>Тип документа</Label>
             <ComboBox x:Name="cbType"></ComboBox>
-            <TextBox></TextBox>
 
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="btnInsert" Padding="10" Margin="10">Сохранить как новый</Button>

@@ -28,5 +28,10 @@ namespace Plotnikov_PR_21_102_DocumentManager.Entity
         public virtual document_types document_types { get; set; }
         public virtual projects projects { get; set; }
         public virtual ICollection<files> files { get; set; }
+
+        public override string ToString()
+        {
+            return $"{name} ({document_types.doctype_name})";
+        }
     }
 }

@@ -23,5 +23,11 @@ namespace Plotnikov_PR_21_102_DocumentManager.Entity
         public string doctype_name { get; set; }
     
         public virtual ICollection<documents> documents { get; set; }
+
+
+        public override string ToString()
+        {
+            return doctype_name;
+        }
     }
 }
